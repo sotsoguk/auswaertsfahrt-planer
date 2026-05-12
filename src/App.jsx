@@ -375,26 +375,27 @@ function StadionPlaner() {
 
 	return (
 		<div className="flex flex-col h-screen bg-slate-900 text-white overflow-hidden font-sans">
-			{/* Header mit Startort-Suche */}
-			<header className="shrink-0 p-4 bg-slate-800 border-b border-slate-700 z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-				<h1 className="text-xl font-black text-red-600 uppercase italic tracking-tighter">
-					AwayDays 26/27
-				</h1>
+		
+    	{/* Header mit Startort-Suche */}
+			<header className="shrink-0 p-2 bg-slate-800 border-b border-slate-700 z-10 flex flex-col md:flex-row md:items-center justify-between gap-2">
+      {/* </header><header className="shrink-0 p-4 bg-slate-800 border-b border-slate-700 z-10 flex flex-col md:flex-row md:items-center justify-between gap-4"> */}
+				<h1 className="text-lg font-black text-red-600 uppercase italic tracking-tighter px-1">
+    Away Day 26/27
+  </h1>
 
-				<div className="flex items-center bg-slate-950 rounded-full px-4 py-1.5 border border-slate-700 w-full md:w-96">
-					<span className="text-[10px] text-slate-500 uppercase font-bold mr-3 shrink-0">
-						Start:
-					</span>
-					<input
-						type="text"
-						value={startInput}
-						onChange={(e) => setStartInput(e.target.value)}
-						onKeyDown={handleStartSearch}
-						className="bg-transparent border-none text-sm focus:outline-none w-full text-slate-200"
-						placeholder="Ort eingeben & Enter..."
-					/>
-				</div>
-			</header>
+				{/* Input-Feld kompakter */}
+  <div className="flex items-center bg-slate-950 rounded-full px-3 py-1 border border-slate-700 w-full md:w-80">
+    <span className="text-[9px] text-slate-500 uppercase font-bold mr-2 shrink-0">Start:</span>
+    <input 
+      type="text"
+      value={startInput}
+      onChange={(e) => setStartInput(e.target.value)}
+      onKeyDown={handleStartSearch}
+      className="bg-transparent border-none text-xs focus:outline-none w-full text-slate-200 py-1"
+      placeholder="Ort suchen..."
+    />
+  </div>
+</header>
 
 			<div className="shrink-0 h-[40vh] w-full relative">
 				<Map
