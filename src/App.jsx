@@ -374,33 +374,31 @@ function StadionPlaner() {
 	};
 
 	return (
-		<div className="flex flex-col h-screen bg-slate-900 text-white overflow-hidden font-sans">
-		
-    	{/* Ultra-Slim Einzeiler Header */}
-<header className="shrink-0 p-1.5 px-3 bg-slate-800 border-b border-slate-700 z-10 flex flex-row items-center gap-3">
-  
-  {/* Titel: Extrem kompakt und bricht nicht um */}
-  <h1 className="text-xs font-black text-red-600 uppercase italic tracking-tighter whitespace-nowrap">
-    AwayDays 26/27
-  </h1>
-  
-  {/* Suche: Nimmt den restlichen Platz ein */}
-  <div className="flex-1 flex items-center bg-slate-950 rounded-full px-3 py-0.5 border border-slate-700 max-w-md">
-    <span className="text-[8px] text-slate-500 uppercase font-bold mr-2 hidden xs:block shrink-0">
-      Start:
-    </span>
-    <input 
-      type="text"
-      value={startInput}
-      onChange={(e) => setStartInput(e.target.value)}
-      onKeyDown={handleStartSearch}
-      className="bg-transparent border-none text-[11px] focus:outline-none w-full text-slate-200 py-0.5"
-      placeholder="Ort suchen..."
-    />
-  </div>
-</header>
+		<div className="flex flex-col h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans antialiased">
+			{/* Ultra-Slim Header mit Glassmorphism */}
+			{/* Optimierter Header */}
+			<header className="shrink-0 p-2 px-4 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800/50 z-10 flex flex-row items-center gap-4">
+				<h1 className="text-sm font-black tracking-[0.2em] uppercase italic">
+					<span className="text-rose-500">Away</span>
+					<span className="text-zinc-100 ml-1">Days</span>
+					<span className="text-zinc-500 font-light ml-2 text-[10px] not-italic">
+						26/27
+					</span>
+				</h1>
 
-			<div className="shrink-0 h-[40vh] w-full relative">
+				<div className="flex-1 flex items-center bg-zinc-950/50 rounded-full px-3 py-1 border border-zinc-800 focus-within:border-rose-900/50 transition-all max-w-sm">
+					<input
+						type="text"
+						value={startInput}
+						onChange={(e) => setStartInput(e.target.value)}
+						onKeyDown={handleStartSearch}
+						className="bg-transparent border-none text-[11px] focus:outline-none w-full text-zinc-300 placeholder:text-zinc-700"
+						placeholder="Startpunkt..."
+					/>
+				</div>
+			</header>
+
+			<div className="shrink-0 h-[35vh] w-full relative shadow-inner">
 				<Map
 					defaultCenter={startPos}
 					defaultZoom={6}
@@ -425,22 +423,22 @@ function StadionPlaner() {
 						</AdvancedMarker>
 					))}
 				</Map>
+				<div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_60px_rgba(0,0,0,0.3)]"></div>
 			</div>
 
 			{/* Team-Suche & Liste */}
-			<div className="flex-1 min-h-0 flex flex-col bg-slate-900">
-				{/* Team-Suchleiste */}
-				<div className="p-4 bg-slate-900/80 border-b border-slate-800">
+			<div className="flex-1 min-h-0 flex flex-col bg-zinc-950">
+				<div className="p-3 bg-zinc-950 border-b border-zinc-900">
 					<input
 						type="text"
 						placeholder="Mannschaft suchen..."
-						className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-4 text-sm focus:border-red-600 outline-none transition-colors"
+						className="w-full bg-zinc-900/50 border border-zinc-800 rounded-lg py-1.5 px-4 text-xs focus:ring-1 focus:ring-zinc-700 outline-none transition-all placeholder:text-zinc-600"
 						value={filterText}
 						onChange={(e) => setFilterText(e.target.value)}
 					/>
 				</div>
 
-				<div className="flex-1 overflow-y-auto">
+				<div className="flex-1 overflow-y-auto custom-scrollbar">
 					{/* Tabellen-Header */}
 					<div className="hidden md:flex p-2 px-4 border-b border-slate-800 text-[10px] text-slate-500 uppercase font-bold sticky top-0 bg-slate-900 z-10">
 						<div
@@ -482,34 +480,51 @@ function StadionPlaner() {
 						<div
 							key={s.id}
 							onClick={() => handleStadiumClick(s)}
-							className={`flex flex-col md:flex-row md:items-center p-3 px-4 border-b border-slate-800/50 cursor-pointer hover:bg-slate-800/40 ${selectedStadium?.id === s.id ? "bg-slate-800 border-l-4 border-l-red-600" : "border-l-4 border-l-transparent"}`}
+							className={`
+      flex flex-row items-center p-3 px-4 transition-all duration-150 border-b border-zinc-900/30
+      ${
+				selectedStadium?.id === s.id
+					? "bg-zinc-900 shadow-[inset_3px_0_0_0_#f43f5e]"
+					: "hover:bg-zinc-900/40"
+			}
+    `}
 						>
-							<div className="flex items-center gap-3 md:w-1/3">
+							{/* Logo-Container mit fixer Breite für Ruhe in der Optik */}
+							<div className="w-10 shrink-0 flex justify-start items-center">
 								<img
 									src={s.logoUrl}
-									className="w-6 h-6 object-contain bg-white rounded-full p-0.5"
+									className={`w-7 h-7 object-contain bg-white rounded-full p-0.5 shadow-sm transition-transform ${selectedStadium?.id === s.id ? "scale-110" : ""}`}
 									alt=""
 								/>
-								<div className="flex items-start flex-col">
-									<span className="font-bold text-sm">{s.team}</span>
-									<span className="text-slate-500 text-[10px]">
-										{s.stadium}
+							</div>
+
+							{/* Text-Block: Konsequent linksbündig */}
+							<div className="flex flex-col items-start flex-1 ml-2">
+								<span
+									className={`text-sm font-bold tracking-tight ${selectedStadium?.id === s.id ? "text-white" : "text-zinc-200"}`}
+								>
+									{s.team}
+								</span>
+								<span className="text-zinc-500 text-[9px] uppercase tracking-wider font-medium">
+									{s.stadium}
+								</span>
+							</div>
+
+							{/* Rechte Spalte: Kompakt gehalten */}
+							<div className="flex flex-col items-end shrink-0">
+								<div className="flex items-center gap-2">
+									<span className="text-[10px] font-mono text-zinc-600">
+										{s.distance}
+									</span>
+									<span
+										className={`text-xs font-bold ${selectedStadium?.id === s.id ? "text-rose-400" : "text-rose-600"}`}
+									>
+										{s.duration}
 									</span>
 								</div>
-							</div>
-							<div className="flex flex-row md:flex-col gap-2 md:w-1/3 text-xs my-1 md:my-0">
-								<span className="text-yellow-500 font-bold">
-									{s.matchday || "TBA"}
-								</span>
-								<span className="text-slate-500">{s.date || "TBA"}</span>
-							</div>
-							<div className="flex gap-4 md:w-1/3 md:justify-end font-mono text-xs">
-								<span className="text-slate-300 w-20 md:text-right">
-									{s.distance}
-								</span>
-								<span className="text-red-500 font-bold w-20 md:text-right">
-									{s.duration}
-								</span>
+								<div className="text-[8px] text-zinc-400 font-bold bg-zinc-800 px-1.5 py-0.5 rounded-sm mt-1">
+									SPIELTAG {s.matchday}
+								</div>
 							</div>
 						</div>
 					))}
