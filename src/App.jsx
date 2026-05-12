@@ -165,6 +165,7 @@ function StadionPlaner() {
 					defaultZoom={6}
 					mapId={MAP_ID}
 					gestureHandling={"greedy"}
+          disableDefaultUI={"true"}
 				>
 					{stadiumsWithData.map((s) => (
 						<AdvancedMarker
