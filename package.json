@@ -1,5 +1,6 @@
 {
   "name": "auswaertsfahrt-planer",
+  "homepage": "https://roadtrip.sotsog.uk",
   "private": true,
   "version": "0.0.0",
   "type": "module",
