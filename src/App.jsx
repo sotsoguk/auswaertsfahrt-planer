@@ -376,22 +376,25 @@ function StadionPlaner() {
 	return (
 		<div className="flex flex-col h-screen bg-slate-900 text-white overflow-hidden font-sans">
 		
-    	{/* Header mit Startort-Suche */}
-			<header className="shrink-0 p-2 bg-slate-800 border-b border-slate-700 z-10 flex flex-col md:flex-row md:items-center justify-between gap-2">
-      {/* </header><header className="shrink-0 p-4 bg-slate-800 border-b border-slate-700 z-10 flex flex-col md:flex-row md:items-center justify-between gap-4"> */}
-				<h1 className="text-lg font-black text-red-600 uppercase italic tracking-tighter px-1">
-    Away Day 26/27
+    	{/* Ultra-Slim Einzeiler Header */}
+<header className="shrink-0 p-1.5 px-3 bg-slate-800 border-b border-slate-700 z-10 flex flex-row items-center gap-3">
+  
+  {/* Titel: Extrem kompakt und bricht nicht um */}
+  <h1 className="text-xs font-black text-red-600 uppercase italic tracking-tighter whitespace-nowrap">
+    AwayDays 26/27
   </h1>
-
-				{/* Input-Feld kompakter */}
-  <div className="flex items-center bg-slate-950 rounded-full px-3 py-1 border border-slate-700 w-full md:w-80">
-    <span className="text-[9px] text-slate-500 uppercase font-bold mr-2 shrink-0">Start:</span>
+  
+  {/* Suche: Nimmt den restlichen Platz ein */}
+  <div className="flex-1 flex items-center bg-slate-950 rounded-full px-3 py-0.5 border border-slate-700 max-w-md">
+    <span className="text-[8px] text-slate-500 uppercase font-bold mr-2 hidden xs:block shrink-0">
+      Start:
+    </span>
     <input 
       type="text"
       value={startInput}
       onChange={(e) => setStartInput(e.target.value)}
       onKeyDown={handleStartSearch}
-      className="bg-transparent border-none text-xs focus:outline-none w-full text-slate-200 py-1"
+      className="bg-transparent border-none text-[11px] focus:outline-none w-full text-slate-200 py-0.5"
       placeholder="Ort suchen..."
     />
   </div>
